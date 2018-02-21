@@ -1,0 +1,32 @@
+/* ---| No helpers defined in cell.yaml |--- */
+/* ---| Cells |--- */
+.Bdrus\(1rem\) {border-radius: 1rem;}
+.Bgc\(\#505050\) {background-color: #505050;}
+.Bgc\(\#909090\) {background-color: #909090;}
+.Bgi\(url\(resources\/brick\.jpg\)\) {background-image: url(resources/brick.jpg);}
+.Bxsh\(\.5rem\,\.5rem\,\.5rem\,\#000\) {box-shadow: .5rem .5rem .5rem #000;}
+.Bxz\(bb\) {box-sizing: border-box;}
+.C\(\#191919\) {color: #191919;}
+.D\(b\) {display: block;}
+.D\(f\) {display: flex;}
+.Fld\(c\) {flex-direction: column;}
+.Flx\(1\) {flex: 1;}
+.Flx\(7\) {flex: 7;}
+.H\(100\%\) {height: 100%;}
+.H\(20\%\) {height: 20%;}
+.H\(75\%\) {height: 75%;}
+.Jc\(sb\) {justify-content: space-between;}
+.M\(0\) {margin: 0;}
+.Maw\(50\%\) {max-width: 50%;}
+.Maw\(80\%\) {max-width: 80%;}
+.Mt\(1rem\) {margin-top: 1rem;}
+.Mx\(1rem\) {margin-left: 1rem; margin-right: 1rem;}
+.Mx\(a\) {margin-left: auto; margin-right: auto;}
+.My\(0\) {margin-top: 0; margin-bottom: 0;}
+.My\(\.5rem\) {margin-top: .5rem; margin-bottom: .5rem;}
+.P\(1rem\) {padding: 1rem;}
+.P\(\.5rem\) {padding: .5rem;}
+.Pt\(1rem\) {padding-top: 1rem;}
+.W\(100\%\) {width: 100%;}
+.W\(2\.5rem\) {width: 2.5rem;}
+.W\(90\%\) {width: 90%;}

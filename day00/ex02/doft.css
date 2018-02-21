@@ -1,7 +1,9 @@
 /* ---| No helpers defined in cell.yaml |--- */
 /* ---| Cells |--- */
-.Bdrus\(1rem\) {border-radius: 1rem;}
+.B\(2rem\) {bottom: 2rem;}
+.Bdrus\(\.5rem\) {border-radius: .5rem;}
 .Bgc\(\#505050\) {background-color: #505050;}
+.Bgc\(\#88FF89\) {background-color: #88FF89;}
 .Bgc\(\#909090\) {background-color: #909090;}
 .Bgi\(url\(resources\/brick\.jpg\)\) {background-image: url(resources/brick.jpg);}
 .Bxsh\(\.5rem\,\.5rem\,\.5rem\,\#000\) {box-shadow: .5rem .5rem .5rem #000;}
@@ -9,12 +11,15 @@
 .C\(\#191919\) {color: #191919;}
 .D\(b\) {display: block;}
 .D\(f\) {display: flex;}
+.Ff\(ss\) {font-family: sans-serif;}
 .Fld\(c\) {flex-direction: column;}
 .Flx\(1\) {flex: 1;}
 .Flx\(7\) {flex: 7;}
 .H\(100\%\) {height: 100%;}
+.H\(1\.2rem\) {height: 1.2rem;}
 .H\(20\%\) {height: 20%;}
 .H\(75\%\) {height: 75%;}
+.H\(9rem\) {height: 9rem;}
 .Jc\(sb\) {justify-content: space-between;}
 .M\(0\) {margin: 0;}
 .Maw\(50\%\) {max-width: 50%;}
@@ -26,7 +31,14 @@
 .My\(\.5rem\) {margin-top: .5rem; margin-bottom: .5rem;}
 .P\(1rem\) {padding: 1rem;}
 .P\(\.5rem\) {padding: .5rem;}
+.Pos\(f\) {position: fixed;}
 .Pt\(1rem\) {padding-top: 1rem;}
+.Px\(20\%\) {padding-left: 20%; padding-right: 20%;}
+.Px\(\.5rem\) {padding-left: .5rem; padding-right: .5rem;}
+.Py\(1rem\) {padding-top: 1rem; padding-bottom: 1rem;}
 .W\(100\%\) {width: 100%;}
+.W\(20\%\) {width: 20%;}
+.W\(24rem\) {width: 24rem;}
 .W\(2\.5rem\) {width: 2.5rem;}
+.W\(70\%\) {width: 70%;}
 .W\(90\%\) {width: 90%;}

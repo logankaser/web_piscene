@@ -1,4 +1,7 @@
-static PyObject *psutil_users(PyObject *self, PyObject *args) {
+#include <Python.h>
+#include <utmpx.h>
+
+static PyObject *users(PyObject *self, PyObject *args) {
 	struct utmpx *utx;
 	PyObject *py_username = NULL;
 	PyObject *py_tty = NULL;
@@ -22,7 +25,7 @@ static PyObject *psutil_users(PyObject *self, PyObject *args) {
 			(float)utx->ut_tv.tv_sec, // start time
 			utx->ut_pid // process id
 		);
-		PyList_Append(py_retlist, py_tuple)
+		PyList_Append(py_retlist, py_tuple);
 		Py_DECREF(py_username);
 		Py_DECREF(py_tty);
 		Py_DECREF(py_hostname);
@@ -31,4 +34,25 @@ static PyObject *psutil_users(PyObject *self, PyObject *args) {
 
 	endutxent();
 	return py_retlist;
+}
+
+static PyMethodDef UsersMethods[] = {
+    {"users", users, METH_VARARGS,
+     "Return users as a list of tuples"},
+    {NULL, NULL, 0, NULL}
+};
+
+static struct PyModuleDef usersmodule = {
+    PyModuleDef_HEAD_INIT,
+    "users",
+    0,
+    -1,
+    UsersMethods
+};
+
+
+PyMODINIT_FUNC
+PyInit_users(void)
+{
+	return PyModule_Create(&usersmodule);
 }

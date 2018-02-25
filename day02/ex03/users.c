@@ -31,7 +31,6 @@ static PyObject *users(PyObject *self, PyObject *args) {
 		Py_DECREF(py_hostname);
 		Py_DECREF(py_tuple);
 	}
-
 	endutxent();
 	return py_retlist;
 }

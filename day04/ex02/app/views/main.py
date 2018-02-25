@@ -87,6 +87,8 @@ def modify():
     if request.method == "POST":
         if not check_password_hash(g.user["pw_hash"], request.form["password"]):
             error = "Invalid password"
+        elif len(request.form["password_new"]) < 6:
+            error = "Password too short, must be > 6 characters"
         else:
             flash("Password changed")
             db = get_db()
@@ -110,6 +112,8 @@ def register():
             error = "You have to enter a valid email address"
         elif not request.form["password"]:
             error = "You have to enter a password"
+        elif len(request.form["password"]) < 6:
+            error = "Password too short, must be > 6 characters"
         elif request.form["password"] != request.form["password2"]:
             error = "The two passwords do not match"
         elif get_user_id(request.form["username"]) is not None:

@@ -58,7 +58,50 @@ def before_request():
                           [session["id"]], one=True)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route("/store", methods=["GET"])
+def store():
+    """View the storefront."""
+    return render_template("store.html")
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    """Registers the user."""
+    if not g.user is None:
+        session.pop("id", None)
+    error = None
+    if request.method == "POST":
+        if not request.form["username"]:
+            error = "You have to enter a username"
+        elif not request.form["email"] or \
+                "@" not in request.form["email"]:
+            error = "You have to enter a valid email address"
+        elif not request.form["password"]:
+            error = "You have to enter a password"
+        elif len(request.form["password"]) < 6:
+            error = "Password too short, must be > 6 characters"
+        elif request.form["password"] != request.form["password2"]:
+            error = "The two passwords do not match"
+        elif get_user_id(request.form["username"]) is not None:
+            error = "The username is already taken"
+        else:
+            db = get_db()
+            db.execute("""
+                INSERT INTO Users (
+                username, email, pw_hash, admin) values (?, ?, ?, ?)
+            """,
+                [request.form["username"], 
+                request.form["email"],
+                generate_password_hash(request.form["password"]),
+                0 if request.form.get("admin") is None else 1
+            ])
+            db.commit()
+            flash("Registration complete!")
+            return redirect(url_for("login"))
+    return render_template("register.html", error=error)
+
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
     """Logs the user in."""
     if g.user:
@@ -78,7 +121,16 @@ def login():
             return render_template("login.html", error=error)
     return render_template("login.html", error=error)
 
-@app.route('/user/modify', methods=['GET', 'POST'])
+
+@app.route("/logout")
+def logout():
+    """Logs the user out."""
+    flash("You were logged out")
+    session.pop("id", None)
+    return redirect(url_for("login"))
+
+
+@app.route("/user/modify", methods=["GET", "POST"])
 def modify():
     """Change user password"""
     if g.user is None:
@@ -100,43 +152,13 @@ def modify():
             return render_template("modify.html", error=error)
     return render_template("modify.html", error=error)
 
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    """Registers the user."""
+
+@app.route("/users", methods=["GET"])
+def users():
+    """Change user password"""
+    if g.user is None or not g.user["admin"]:
+       return redirect(url_for("login")) 
+    print(g.user["admin"] == 0)
     error = None
-    if request.method == "POST":
-        if not request.form["username"]:
-            error = "You have to enter a username"
-        elif not request.form["email"] or \
-                "@" not in request.form["email"]:
-            error = "You have to enter a valid email address"
-        elif not request.form["password"]:
-            error = "You have to enter a password"
-        elif len(request.form["password"]) < 6:
-            error = "Password too short, must be > 6 characters"
-        elif request.form["password"] != request.form["password2"]:
-            error = "The two passwords do not match"
-        elif get_user_id(request.form["username"]) is not None:
-            error = "The username is already taken"
-        else:
-            db = get_db()
-            db.execute("""
-                INSERT INTO Users (
-                username, email, pw_hash) values (?, ?, ?)
-            """,
-                [request.form["username"], 
-                request.form["email"],
-                generate_password_hash(request.form["password"])])
-            db.commit()
-            flash("Registration complete!")
-            return redirect(url_for("login"))
-    return render_template("register.html", error=error)
-
-
-@app.route("/logout")
-def logout():
-    """Logs the user out."""
-    flash("You were logged out")
-    session.pop("id", None)
-    return redirect(url_for("login"))
-
+    users = query_db("""SELECT * FROM Users""")
+    return render_template("users.html", users=users)

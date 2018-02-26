@@ -1,23 +1,25 @@
 {% extends "layout.html" %}
-{% block title %}APP / Register{% endblock %}
+{% block title %}42 Bazzar / Register{% endblock %}
 {% block content %}
 <main class="Mx(a) Maw(50rem)">
-	<h1 class="Ta(c) Fz(s4) Fw(n)" >Register</h1>
+	<h1 class="Ta(c) Fz(s4) Fw(n)" >42 Bazzar / Register</h1>
 	<form action="" method="post">
 		<div>
-			<legend>login</legend>
+			<legend>Login</legend>
 			<input name="username" value="{{ request.form.username }}">
 		</div>
 		<div>
-			<legend>email</legend>
+			<legend>Email</legend>
 			<input name="email" value="{{ request.form.email }}">
 		</div>
 		<hr class="Bd(s,1px,black)">
 		<div>
-			<legend>password</legend>
+			<legend>Password</legend>
 			<input type="password" name="password">
-			<legend>password again</legend>
+			<legend>Password again</legend>
 			<input type="password" name="password2">
+			<legend>Is admin</legend>
+			<input type="checkbox" name="admin">
 		</div>
 		{% if error %}<div class="C(red)">{{ error }}</div>{% endif %}
 		<input

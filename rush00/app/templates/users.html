@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}42 Bazaar / Users{% endblock %}
+{% block content %}
+<main class="Mx(a) Maw(50rem)">
+	<h1 class="Ta(c) Fz(s4) Fw(n)" >42 Bazaar / Users</h1>
+	{% for user in users %}
+		<div>
+			<b>username:</b> {{ user.username }} <b>email:</b> {{ user.email }} <b>admin:</b> {{ user.admin == 1 }}
+		</div>
+	{% endfor %}
+</main>
+{% endblock %}

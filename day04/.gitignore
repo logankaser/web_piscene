@@ -1,7 +1,0 @@
-.DS*
-.nfs*
-._*
-*.swp*
-__pycache__
-*test.db
-*flask

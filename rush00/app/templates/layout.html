@@ -15,11 +15,14 @@
 
 {% with flashes = get_flashed_messages() %}
 	{% if flashes %}
-		<ul class="Pos(a)">
+		<div class="Pos(a)">
 		{% for message in flashes %}
-			<li>{{ message }}
+		<div onclick="parentNode.remove()"
+			class="Bgc(black) Bgc(grey):h P(.5rem) Bdrus(2px) C(white) Ff(Exo2) M(.5rem)">
+			{{ message }}
+		</div>
 		{% endfor %}
- 		</ul>
+ 		</div>
 	{% endif %}
 {% endwith %}
 <body class="D(f) H(100%) M(0) | Ff(ClearSans)">

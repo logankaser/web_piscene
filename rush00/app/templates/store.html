@@ -1,7 +1,78 @@
 {% extends "layout.html" %}
-{% block title %}42 Bazaar / Store{% endblock %}
+{% block title %}42 Bazaar{% endblock %}
+{% block head %}
+<style>
+.container {
+	display: flex;  
+	text-align: center;
+	flex: 1;
+}
+
+.sidebar {
+	flex: 0.3;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.main {
+	text-align: center;
+	background: grey;
+	padding: 0;
+	flex: 1;
+}
+
+.box {
+	padding: .5rem;
+	background: white;
+	margin-top: 2rem;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 90%;
+	color: #191919;
+	border-radius: .5rem;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+h3 {
+	font-family: Exo2;
+}
+</style>
+{% endblock %}
 {% block content %}
-<main class="Mx(a) Maw(50rem)">
-	<h1 class="Ta(c) Fz(s4) Fw(n)" >42 Bazaar / Store</h1>
-</main>
+<div class="container">
+	<article class="main">
+		<div class="box">
+			<a href="#">
+				<img src="/static/skateboard.jpg" style="width:120px;height:120px;" alt="Skateboard"></img>
+			</a>
+			<h3>Skateboard</h3>
+			<p>$20</p>
+		</div>
+		<div class="box">
+			<a href="#">
+				<img src="/static/Halo5.jpg" style="width:120px;height:120px;" alt="Halo5 Soundtrack"></img>
+			</a>
+			<h3>Halo5 Soundtrack</h3>
+			<p>$17</p>
+		</div>
+	</article>
+	<article class="main">
+		<div class="box">
+			<a href="#">
+				<img src="/static/bazaar_placeholder.jpg" style="width:120px;height:120px;" alt="Apartment in Downtown SF"></img>
+			</a>
+			<h3>Apartment in Downtown SF</h3>
+			<p>$3000/3 Souls</p>
+		</div>
+		<div class="box">
+			<a href="#">
+				<img src="/static/bazaar_placeholder.jpg" style="width:120px;height:120px;" alt="FdF-Machine"></img>
+			</a>
+			<h3>FdF-Machine</h3>
+			<p>$2000</p>
+		</div>
+	</article>
+</div>
+<div class="sidebar">
+	<h1 class="Ff(Exo2) Ta(c) Fz(s4) Fw(n)" >42 Bazaar</h1>
+</div>
 {% endblock %}

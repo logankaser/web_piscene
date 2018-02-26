@@ -54,13 +54,16 @@ def get_user_id(username):
 def before_request():
     g.user = None
     if "id" in session:
-        g.user = query_db("select * from Users where id = ?",
-                          [session["id"]], one=True)
+        g.user = query_db("select * from Users where id = ?", [
+            session["id"]
+        ], one=True)
 
 
-@app.route("/store", methods=["GET"])
+@app.route("/", methods=["GET"])
 def store():
     """View the storefront."""
+    if "basket" in session:
+        return render_template("store.html", basket=session["basket"])
     return render_template("store.html")
 
 
@@ -158,7 +161,6 @@ def users():
     """Change user password"""
     if g.user is None or not g.user["admin"]:
        return redirect(url_for("login")) 
-    print(g.user["admin"] == 0)
     error = None
     users = query_db("""SELECT * FROM Users""")
     return render_template("users.html", users=users)

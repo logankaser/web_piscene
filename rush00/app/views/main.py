@@ -67,6 +67,43 @@ def store():
     return render_template("store.html")
 
 
+@app.route("/add/<item>", methods=["GET"])
+def add(item):
+    """Add item to basket."""
+    if "basket" in session:
+        session["basket"] += [item]
+    else:
+        session["basket"] = [item]
+    return redirect(url_for("store"))
+
+
+@app.route("/clear", methods=["GET"])
+def clear():
+    """Clear basket."""
+    if "basket" in session:
+        session["basket"] = []
+    return redirect(url_for("store"))
+
+
+@app.route("/checkout", methods=["GET"])
+def checkout():
+    """Checkout basket."""
+    if  g.user is None:
+        return redirect(url_for("login"))
+    db = get_db()
+    db.execute("""
+        INSERT INTO Orders(
+        user, contents) values (?, ?)
+    """,[
+        g.user["id"],
+        ", ".join(session["basket"])
+    ])
+    db.commit()
+    session["basket"] = []
+    flash("Checkout success!")
+    return redirect(url_for("store"))
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Registers the user."""
@@ -100,7 +137,10 @@ def register():
             ])
             db.commit()
             flash("Registration complete!")
-            return redirect(url_for("login"))
+            if request.form.get("admin") is None: 
+                return redirect(url_for("login"))
+            else:
+                return redirect(url_for("orders"))
     return render_template("register.html", error=error)
 
 
@@ -121,7 +161,10 @@ def login():
         else:
             session["id"] = user["id"]
             flash("Login successful!")
-            return render_template("login.html", error=error)
+            if user["admin"] == 0:
+                return redirect(url_for("store"))
+            else:
+                return redirect(url_for("orders"))
     return render_template("login.html", error=error)
 
 
@@ -158,9 +201,38 @@ def modify():
 
 @app.route("/users", methods=["GET"])
 def users():
-    """Change user password"""
     if g.user is None or not g.user["admin"]:
-       return redirect(url_for("login")) 
-    error = None
+       return redirect(url_for("login"))
     users = query_db("""SELECT * FROM Users""")
     return render_template("users.html", users=users)
+
+@app.route("/user/delete/<user_id>", methods=["GET"])
+def user_delete(user_id):
+    if g.user is None or not g.user["admin"]:
+       return redirect(url_for("login"))
+    db = get_db()
+    db.execute("""DELETE FROM Users WHERE id = ?""", [
+        user_id
+    ])
+    db.commit()
+    return redirect(url_for("users"))
+
+
+@app.route("/orders", methods=["GET"])
+def orders():
+    if g.user is None or not g.user["admin"]:
+       return redirect(url_for("login"))
+    orders = query_db("""SELECT * FROM Orders""")
+    return render_template("orders.html", orders=orders)
+
+
+@app.route("/order/delete/<order_id>", methods=["GET"])
+def order_delete(order_id):
+    if g.user is None or not g.user["admin"]:
+       return redirect(url_for("login"))
+    db = get_db()
+    db.execute("""DELETE FROM Orders WHERE id = ?""", [
+        order_id
+    ])
+    db.commit()
+    return redirect(url_for("orders"))

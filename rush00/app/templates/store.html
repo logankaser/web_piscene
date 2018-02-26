@@ -41,14 +41,21 @@ h3 {
 <div class="container">
 	<article class="main">
 		<div class="box">
-			<a href="#">
+			<a href="/add/Ninja%20Training">
+				<img src="/static/ninja.jpg" style="width:120px;height:120px;" alt="ninja"></img>
+			</a>
+			<h3>Ninja Training</h3>
+			<p>$500</p>
+		</div>
+		<div class="box">
+			<a href="/add/Skateboard">
 				<img src="/static/skateboard.jpg" style="width:120px;height:120px;" alt="Skateboard"></img>
 			</a>
 			<h3>Skateboard</h3>
 			<p>$20</p>
 		</div>
 		<div class="box">
-			<a href="#">
+			<a href="/add/Halo5%20Soundtrack">
 				<img src="/static/Halo5.jpg" style="width:120px;height:120px;" alt="Halo5 Soundtrack"></img>
 			</a>
 			<h3>Halo5 Soundtrack</h3>
@@ -57,22 +64,39 @@ h3 {
 	</article>
 	<article class="main">
 		<div class="box">
-			<a href="#">
+			<a href="/add/Apartment">
 				<img src="/static/bazaar_placeholder.jpg" style="width:120px;height:120px;" alt="Apartment in Downtown SF"></img>
 			</a>
 			<h3>Apartment in Downtown SF</h3>
-			<p>$3000/3 Souls</p>
+			<p>$3000 &amp; 3 Souls (per month)</p>
 		</div>
 		<div class="box">
-			<a href="#">
-				<img src="/static/bazaar_placeholder.jpg" style="width:120px;height:120px;" alt="FdF-Machine"></img>
+			<a href="/add/FDF-Machine">
+				<img src="/static/3ds.jpeg" style="width:120px;height:120px;" alt="FdF-Machine"></img>
 			</a>
 			<h3>FdF-Machine</h3>
 			<p>$2000</p>
+		</div>
+	<div class="box">
+			<a href="/add/SFV%20PC">
+				<img src="/static/SFV.jpeg" style="width:120px;height:120px;" alt="SFV"></img>
+			</a>
+			<h3>SFV (PC)</h3>
+			<p>$30</p>
 		</div>
 	</article>
 </div>
 <div class="sidebar">
 	<h1 class="Ff(Exo2) Ta(c) Fz(s4) Fw(n)" >42 Bazaar</h1>
+	<a href="/logout" class="Ta(c) Td(n) Ff(Exo2) D(b) C(#191919)">Logout</a>
+	{% for item in basket %}
+	<div class="Ta(c) Bgc(black) P(.5rem) Bdrus(2px) C(white) Ff(Exo2) M(.5rem)">
+		{{ item }}
+	</div>
+	{% endfor %}
+	{% if basket %}
+	<a href="/clear" class="Ta(c) Td(n) Ff(Exo2) D(b) Bgc(grey) Bgc(grey-2):h C(white) M(.5rem) P(.5rem) Bdrus(2px)">Clear All</a>
+	<a href="/checkout" class="Ta(c) Td(n) Ff(Exo2) D(b) Bgc(grey) Bgc(grey-2):h C(white) M(.5rem) P(.5rem) Bdrus(2px) Fz(1.5rem)">Checkout</a>
+	{% endif %}
 </div>
 {% endblock %}

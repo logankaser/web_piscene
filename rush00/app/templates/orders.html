@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}42 Bazaar / Orders{% endblock %}
+{% block content %}
+<main class="Mx(a) Maw(50rem)">
+	<h1 class="Ff(Exo2) Ta(c) Fz(s4) Fw(n)" >42 Bazaar / Orders</h1>
+	<a href="/users" class="Ta(c) D(b)">view users</a>
+	{% for order in orders %}
+		<div>
+			<a href="/order/delete/{{order.id}}">cancel order</a>
+			<b>user_id:</b> {{ order.user }} <b>order_id:</b> {{ order.id }} <b>ordered:</b> {{ order.contents }}
+		</div>
+	{% endfor %}
+</main>
+{% endblock %}

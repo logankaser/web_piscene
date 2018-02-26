@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}APP / Change password{% endblock %}
+{% block content %}
+<main class="Mx(a) Maw(50rem)">
+	<h1 class="Ta(c) Fz(s4) Fw(n)" >Change password</h1>
+	<form action="" method="post">
+		<div>
+			<legend>password</legend>
+			<input type="password" name="password">
+			<legend>password again</legend>
+			<input type="password" name="password_new">
+		</div>
+		{% if error %}<div class="C(red)">{{ error }}</div>{% endif %}
+		<input
+			class="P(s04) Mt(s03) W(100%) | Fz(s1) _rButton() Bd(s,s05,black) Bgc(white) Bgc(black):h C(white):h"
+			type="submit" value="Change Passsword &rsaquo;">
+	</form>
+</main>
+{% endblock %}

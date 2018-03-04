@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class="H(100%) M(0) Bxz(bb)">
+
+<head>
+	<title>Balloon</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<!-- Set box-sizing to inherit so it may be overwritten. -->
+	<style>*,*:before,*:after{-moz-box-sizing:inherit;box-sizing:inherit}</style>
+	<style>.Bxz\(bb\){box-sizing:border-box}.H\(100\%\){height:100%}.M\(0\){margin:0}</style>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body class="H(100%) M(0)">
+	<svg id="balloon" width="200" height="200" viewBox="0 0 2 2" xmlns="http://www.w3.org/2000/svg">
+		<circle id="balloon-circle" fill="rgb(255,80,80)" cx="1" cy="1" r="1"/>
+	</svg>
+</body>
+<script>
+(()=>{
+
+// Red, green, blue
+const colors = ["rgb(255,80,80)", "rgb(80,255,80)", "rgb(80,80,255)"];
+let size = 200;
+let c = 0;
+
+balloon.onclick = () => {
+	const balloon = $("#balloon");
+	const circle = $("#balloon-circle");
+	size += 10;
+	if (size >= 420)
+		size = 200;
+	c = c < 2 ? c + 1 : 0;
+	circle.attr("fill", colors[c]);
+	balloon.attr("width", size);
+	balloon.attr("height", size);
+}
+
+balloon.onmouseout = () => {
+	const balloon = $("#balloon");
+	const circle = $("#balloon-circle");
+	size -= 5;
+	if (size < 200)
+		size = 200;
+	c = c > 0 ? c - 1 : 2;
+	circle.attr("fill", colors[c]);
+	balloon.attr("width", size);
+	balloon.attr("height", size);
+}
+})();
+</script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html class="H(100%) M(0) Bxz(bb)">
+
+<head>
+	<title>Calc</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<!-- Set box-sizing to inherit so it may be overwritten. -->
+	<style>*,*:before,*:after{-moz-box-sizing:inherit;box-sizing:inherit}</style>
+	<style>.Bxz\(bb\){box-sizing:border-box}.H\(100\%\){height:100%}.M\(0\){margin:0}</style>
+</head>
+
+<body class="H(100%) M(0)">
+	<input id="lhs" type="number">
+	<select id="op">
+		<option value="+">+</option>
+		<option value="-">-</option>
+		<option value="*">*</option>
+		<option value="/">/</option>
+		<option value="%">%</option>
+	</select>
+	<input id="rhs" type="number">
+	<input id="calc" type="submit" value="Try me!">
+</body>
+<script>
+(()=>{
+const lhs = document.getElementById("lhs");
+const op = document.getElementById("op");
+const rhs = document.getElementById("rhs");
+
+function calc(l, op, r) {
+	if (l === NaN || r === NaN || l < 0 || r < 0)
+		return "Error :(";
+	switch(op) {
+		case "+": return l + r;
+		case "-": return l - r;
+		case "*": return l * r;
+		case "/":
+			if (r === 0)
+				return "It's over 9000!";
+			return l / r;
+		case "%":
+			if (r === 0)
+				return "It's over 9000!";
+			return l % r;
+		default: return "Error :(";
+	}
+}
+
+document.getElementById("calc").onclick = () => {
+	const value = calc(parseInt(lhs.value), op.value, parseInt(rhs.value));
+	console.log(value);
+	window.alert(value);
+}
+
+window.setInterval(() => {
+	window.alert("Please, use me...");
+}, 30000);
+})();
+</script>
+</html>
